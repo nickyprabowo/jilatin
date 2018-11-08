@@ -2,12 +2,20 @@ import React, { Component } from 'react'
 
 const Sidebar = () => {
 	return (
-		<ul className="vertical-menu">
-			<li>
-				<a href="#">STORE</a>
+		<ul className="sidebar">
+			<li className="site-id">
+				<h2 className="logo">ESGREM</h2>
+				<p>The number #1 ice cream shop</p>
 			</li>
 			<li>
-				<a href="#">GELATO</a>
+				<ul className="vertical-menu">
+					<li>
+						<a href="#">STORE</a>
+					</li>
+					<li>
+						<a href="#">GELATO</a>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	)

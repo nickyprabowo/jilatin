@@ -1,4 +1,4 @@
-import { getGelatos } from '../api/gelatoAPI'
+import { getGelatos, addGelato, getGelatosAsync } from '../api/gelatoAPI'
 import { makeActionCreator } from './actionHelper'
 
 const fetchGelatosRequest = makeActionCreator('GET_GELATOS_REQUEST')
@@ -7,18 +7,28 @@ const fetchGelatosError = makeActionCreator('GET_GELATOS_ERROR')
 const addGelatoRequest = makeActionCreator('ADD_GELATO_REQUEST')
 const addGelatoSuccess = makeActionCreator('ADD_GELATO_SUCCESS')
 const addGelatoError = makeActionCreator('ADD_GELATO_ERROR')
+const onCloseMessage = makeActionCreator('CLOSE_MESSAGE')
 
-export const fetchGelatos = () => dispatch => {
+export function fetchGelatos(){
+	return async function(dispatch){
+		dispatch(fetchGelatosRequest())
 
-	dispatch(fetchGelatosRequest())
+		/*getGelatos()
+			.then(result => result.json())
+			.then(data => dispatch(fetchGelatosSuccess({data})))
+			.catch(error => {
+				
+		})*/
 
-	getGelatos()
-		.then(result => result.json())
-		.then(data => dispatch(fetchGelatosSuccess({data})))
-		.catch(error => {
+		// Let's try to use Async Await to simplify Promise
+		try{
+			const response = await getGelatos()
+			const data = await response.json()
+			dispatch(fetchGelatosSuccess({data}))
+		}catch(error){
 			dispatch(fetchGelatosError({error}))
-		})
-
+		}
+	}
 }
 
 export const toggleModal = () => dispatch => {
@@ -45,14 +55,10 @@ export const toggleInput = () => dispatch => {
 	})
 }
 
-export const addGelato = (data) => dispatch => {
+export const createGelato = data => dispatch => {
 	dispatch(addGelatoRequest())
-
-	const url = "http://localhost:5000/api/gelato"
-	fetch(url, {
-		method: 'POST',
-		body: data
-	})
+	
+	addGelato(data)
 	.then(result => result.json())
 	.then(data => {
 		dispatch(addGelatoSuccess({data}))
@@ -62,3 +68,11 @@ export const addGelato = (data) => dispatch => {
 		dispatch(addGelatoError({error}))
 	})
 }
+
+export const gridView = () => dispatch => dispatch({type: 'GRID_VIEW'})
+
+export const listView = () => dispatch => dispatch({type: 'LIST_VIEW'})
+
+export const makeError = () => dispatch => dispatch({type: 'MAKE_ERROR'})
+
+export const closeMessage = () => dispatch => dispatch(onCloseMessage())

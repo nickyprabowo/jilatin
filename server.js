@@ -21,6 +21,8 @@ app.use((req, res, next) => {
 	next() // pass all the thing to the next middleware
 })
 
+app.use(express.static('uploads'))
+
 // Application routes
 app.use('/api/gelato', gelato)
 

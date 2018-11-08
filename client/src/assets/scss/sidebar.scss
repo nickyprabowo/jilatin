@@ -1,0 +1,33 @@
+.sidebar{
+    display: grid;
+    justify-items: center;
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background: #381163;
+	width: 250px;
+	padding: 2em;
+	color: #fff;
+}
+
+.sidebar li a{
+	color: #fff;
+}
+
+.site-id {
+	align-self: start;
+}
+
+.vertical-menu{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.vertical-menu li {
+	margin: 2em 0;
+}

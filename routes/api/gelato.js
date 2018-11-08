@@ -35,7 +35,7 @@ router.post('/', upload.single('image'), (req,res) => {
 	}
 
 	Gelatos.addGelato(data)
-		.then(result => res.json(result))
+		.then(result => res.json(201, data))
 		.catch(err => res.json(500, {'message':err}))
 })
 

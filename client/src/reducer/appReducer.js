@@ -1,13 +1,19 @@
 import { asyncState } from '../state'
 import { updateObject, updateItemArray } from './reducerHelper'
 
+const viewState = {
+	grid: 'grid',
+	list: 'list'
+}
+
 const initialState = {
 	gelatos: [],
 	showModal: false,
 	showDrawer: false,
 	sidebar: false,
 	input: false,
-	error: ''
+	error: '',
+	viewMode: viewState.grid
 }
 
 export default function app(state=initialState, action){
@@ -66,6 +72,23 @@ export default function app(state=initialState, action){
 
 		case 'TOGGLE_DRAWER': {
 			return updateObject(state, {showDrawer: !state.showDrawer})
+		}
+
+		case 'GRID_VIEW': {
+			return updateObject(state, {viewMode: viewState.grid})
+		}
+
+		case 'LIST_VIEW': {
+			return updateObject(state, {viewMode: viewState.list})
+		}
+
+		case 'MAKE_ERROR': {
+			const status = state.asyncState === 'error' ? asyncState.loaded : asyncState.error
+			return updateObject(state, {asyncState: status})
+		}
+
+		case 'CLOSE_MESSAGE': {
+			return updateObject(state, {asyncState: asyncState.idle})
 		}
 
 		default: 

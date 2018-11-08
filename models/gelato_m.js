@@ -3,7 +3,7 @@ const db = require('../config/dbConnection')
 
 const gelato = {
 	getGelato: () => new Promise((resolve, reject) => {
-		let sql = 'SELECT name, quantity, description, image FROM gelato'
+		let sql = 'SELECT name, quantity, description, image, price FROM gelato'
 		db.query(sql, (err, result, fields) => {
 			if(err) return reject(err);
 			return resolve(result);

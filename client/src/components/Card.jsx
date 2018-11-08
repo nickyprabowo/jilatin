@@ -2,16 +2,26 @@ import React, { Component } from 'react'
 
 class Card extends Component {
 	render(){
+
+		const { item } = this.props
+		const imageURL = "http://localhost:5000/" + item.image
+
 		return(
-			<div className="card">
-				<div className="card-preview">
-					<img src=""/>
+			
+				<div className="card">
+					<img src={imageURL} />
+					<div className="detail">
+						<h2 className="title">{item.name}</h2>
+						<div className="meta">
+							<span className="quantity">Quantity : <span>{item.quantity}</span></span>
+							<span className="price">Rp {item.price}</span>
+						</div>
+						<p className="description">
+							{item.description}
+						</p>
+					</div>
 				</div>
-				<div className="description">
-					<h2 className="desc-title">Title</h2>
-					<p>Price : <span>Rp 20.000</span></p>
-				</div>
-			</div>
+			
 		)
 	}
 }
