@@ -3,20 +3,20 @@
 	position: fixed;
 	list-style-type: none;
 	overflow: hidden;
-	display: flex;
-	background: #eeeeee;
+	background: #641098;
 	width: 100%;
 	box-shadow: 0px 0px 1px 1px #8a8a8a1a;
-}
 
-.navbar > ul.right{
-	flex: 1;
-	display: flex;
-	justify-content: flex-end;
-}
+	ul {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
 
-.navbar > ul > li{
-	display: inline;
+		li {
+			display: flex;
+			align-items: center;
+		}
+	}
 }
 
 .navbar > ul > li a{
@@ -32,4 +32,13 @@
 
 .active{
 	color: #bd335f !important;
+}
+
+.site-id {
+	padding: 0 2em;
+
+	.tagline {
+		color: #ffffff;
+		padding: 0 1em;
+	}
 }

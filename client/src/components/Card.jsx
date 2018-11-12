@@ -16,9 +16,6 @@ class Card extends Component {
 							<span className="quantity">Quantity : <span>{item.quantity}</span></span>
 							<span className="price">Rp {item.price}</span>
 						</div>
-						<p className="description">
-							{item.description}
-						</p>
 					</div>
 				</div>
 			

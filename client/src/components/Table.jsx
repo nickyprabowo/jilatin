@@ -7,6 +7,7 @@ const Table = (props) => {
 				<table>
 					<thead>
 						<tr>
+							<th></th>
 							<th>Name</th>
 							<th>Quantity</th>
 							<th>Description</th>
@@ -16,8 +17,10 @@ const Table = (props) => {
 					<tbody>
 					{props.items.map( gelato => {
 							return (
-								<List 
+								<List
+									key={gelato.id} 
 									data={gelato}
+									{...props}
 								/>
 							)
 						})}

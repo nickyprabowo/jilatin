@@ -5,11 +5,11 @@ import store from './store'
 import Container from './components/Container'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListUl, faCheckSquare, faTh, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faListUl, faCheckSquare, faTh, faTrashAlt, faPencilAlt, faPlus, faSearch, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import './reset.css';
 import './App.scss';
 
-library.add(faListUl,faCheckSquare,faTh,faTrashAlt,faPencilAlt)
+library.add(faListUl,faCheckSquare,faTh,faTrashAlt,faPencilAlt,faPlus,faSearch,faChevronDown,faChevronUp)
 
 class App extends Component {
   render() {

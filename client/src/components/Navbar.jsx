@@ -7,14 +7,13 @@ class Navbar extends Component {
 			<div className="navbar">
 				<ul>
 					<li className="site-id">
-						<h2 className="logo">ESGREM</h2>
-						<p>The number #1 ice cream shop</p>
+						<h2 className="logo">EsGrim</h2>
 					</li>
-					<li>
-						<ul className="right">
+					<li className="right">
+						{/*<ul>
 				            <li><a href="#" className="active">Home</a></li>
 				            <li><a href="#">About</a></li>
-			          	</ul>
+			          	</ul>*/}
 					</li>
 				</ul>
 	        </div>

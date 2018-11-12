@@ -1,15 +1,27 @@
 table {
 	width: 100%;
 	border-collapse: collapse;
-	background: #ffffff;
+	border: 2px solid #d4d4d4;
+}
+
+thead {
+	background: #eaeaea;
 }
 
 th {
 	font-weight: bold;
 }
 
+tr.item-description td {
+	text-align: left;
+}
+
 td, th {
-	border-bottom: 1px solid #dddddd;
-    text-align: left;
+	border-bottom: 2px solid #d4d4d4;
+    text-align: center;
     padding: 1em;
+}
+
+.item-description {
+	background: #e0e0e0;
 }

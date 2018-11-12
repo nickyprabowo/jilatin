@@ -1,38 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 export default class AddModal extends Component {
-	constructor(props) {
-	  	super(props);
-	    this.state = {
-	      	name: '',
-			description: '',
-			stock: 0,
-			formValidity: true
-	    }
-	}
 
 	onClose = (e) => {
 		e.preventDefault()
 		this.props.toggleModal()
-	}
-
-	onClick = () => {
-		this.setState({
-			description: 1
-		})
-	}
-
-	onInputChange = (e) => {
-		const target = e.target
-		const value = target.value
-		const name = target.name
-
-		this.setState((prevState, props) => {
-			return {
-				[name]: value
-			}
-		})
 	}
 
 	onSubmit = (e) => {
@@ -48,21 +21,21 @@ export default class AddModal extends Component {
 				<div className="modal">
 					<form id="add_gelato" onSubmit={this.onSubmit}>
 					<div className="modal__header">
-						<h1>Add Gelato</h1>{this.state.formValidity}
+						<h1>Add Gelato</h1>
 					</div>
 					<div className="modal__body">
 						<div className="form">
 							<div className="form__field">
 								<p className="form__label">Name</p>
-								<input className="form__input" type="text" name="name" onChange={this.onInputChange} required/>
+								<input className="form__input" type="text" name="name"  required/>
 							</div>
 							<div className="form__field">
 								<p className="form__label">Description</p>
-								<textarea className="form__input" onChange={this.onInputChange} name="description" required/>
+								<textarea className="form__input"  name="description" required/>
 							</div>
 							<div className="form__field">
 								<p className="form__label">Stock</p>
-								<input className="form__input" onChange={this.onInputChange} name="quantity" type="number" required/>
+								<input className="form__input"  name="quantity" type="number" required/>
 							</div>
 							<div className="form__field">
 								<p className="form__label">Picture</p>

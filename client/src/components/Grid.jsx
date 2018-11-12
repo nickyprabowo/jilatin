@@ -9,7 +9,10 @@ const Grid = (props) => {
 		<div className="cards">
 			{items.map( gelato => {
 				return (
-					<Card item={gelato} />
+					<Card 
+						key={gelato.id}
+						item={gelato} 
+					/>
 				)
 			})}							
 		</div>

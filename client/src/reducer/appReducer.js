@@ -8,12 +8,13 @@ const viewState = {
 
 const initialState = {
 	gelatos: [],
-	showModal: false,
+	showModal: '',
 	showDrawer: false,
 	sidebar: false,
 	input: false,
 	error: '',
-	viewMode: viewState.grid
+	viewMode: viewState.grid,
+	selectedItem: ''
 }
 
 export default function app(state=initialState, action){
@@ -66,8 +67,24 @@ export default function app(state=initialState, action){
 			return updateObject(state, {asyncState: asyncState.error})
 		}
 
+		case 'DELETE_GELATO_REQUEST': {
+			return updateObject(state, {asyncState: asyncState.loading})
+		}
+
+		case 'DELETE_GELATO_SUCCESS': {
+			const newGelatos = state.gelatos.filter( gelato => gelato.id !== action.payload.data.id )
+			return updateObject(state, {
+				gelatos: newGelatos, 
+				asyncState: asyncState.loaded
+			})
+		}
+
+		case 'DELETE_GELATO_ERROR': {
+			return updateObject(state, {asyncState: asyncState.error})
+		}
+
 		case 'TOGGLE_MODAL': {
-			return updateObject(state, {showModal: !state.showModal})
+			return updateObject(state, {showModal: action.payload.modal})
 		}
 
 		case 'TOGGLE_DRAWER': {
@@ -89,6 +106,10 @@ export default function app(state=initialState, action){
 
 		case 'CLOSE_MESSAGE': {
 			return updateObject(state, {asyncState: asyncState.idle})
+		}
+
+		case 'SELECT_ITEM': {
+			return updateObject(state, {selectedItem: action.payload.id})
 		}
 
 		default: 

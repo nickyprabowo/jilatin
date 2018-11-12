@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import Control from './Control'
 import AddModal from './AddModal'
+import Modal from './Modal'
 import Grid from './Grid'
 import Table from './Table'
 import { CSSTransition } from 'react-transition-group'
 import { IsengHOC } from '../HOC/IsengHOC'
 
 class Gelato extends Component {
+
+	state = {
+		title: ''
+	}
 
 	componentDidMount = () => {
 		if(this.props.gelatos.length === 0){
@@ -20,14 +25,15 @@ class Gelato extends Component {
 
 	render(){
 
-		const { gelatos } = this.props
+		const { gelatos, toggleModal, createGelato } = this.props
+		const { title } = this.state
 
 		return(
 			
 			<div className="container">
 				
-				{this.props.showModal &&
-					<AddModal toggleModal={this.props.toggleModal} submit={this.props.createGelato} />		
+				{this.props.showModal === 'add_gelato' &&
+					<AddModal toggleModal={toggleModal} submit={createGelato} />		
 				}
 				
 				<Control 
@@ -40,7 +46,7 @@ class Gelato extends Component {
 						<Grid items={gelatos} />
 					}
 					{this.props.viewMode === 'list' &&
-						<Table items={gelatos} />
+						<Table items={gelatos} {...this.props}/>
 					}
 				</div>
 			</div>

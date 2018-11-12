@@ -1,5 +1,4 @@
 const express = require('express')
-const cors = require('cors')
 const router = express.Router()
 const uuidv5 = require('uuid/v5')
 const multer = require('multer') // this is needed to parse form data
@@ -21,8 +20,8 @@ const upload = multer({storage: storage})
 
 router.get('/', (req,res) => {
 	Gelatos.getGelato()
-		.then(result => res.json(result))
-		.catch(err => res.json(err))
+		.then(result => res.status(200).json(result))
+		.catch(err => res.status(500).json(err))
 })
 
 router.post('/', upload.single('image'), (req,res) => {
@@ -35,12 +34,17 @@ router.post('/', upload.single('image'), (req,res) => {
 	}
 
 	Gelatos.addGelato(data)
-		.then(result => res.json(201, data))
-		.catch(err => res.json(500, {'message':err}))
+		.then(result => res.status(201).json(data))
+		.catch(err => res.status(500).json({'message':err}))
 })
 
-router.delete('/', (req,res) => {
+router.delete('/:id', (req,res) => {
 
+	const id = req.params.id
+
+	Gelatos.deleteGelato(id)
+		.then(result => res.status(201).json({id}))
+		.catch(err => res.status(500).json({'message':err}))
 })
 
 module.exports = router
