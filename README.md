@@ -12,3 +12,7 @@ React.js
 - Have a try on Async/Await to replace Promise. It looks shorter but in my case there's still no big difference
 - Create Reducer Helper for updating item in array and updating object
 - Create actions creator helper so I don't to create object literal action creator over and over again
+
+Problem
+1. Database not updated when I send PUT request. Actual request is not sent but I always received empty response from OPTIONS method instead
+1.-FIX : return success flag when actual request received, then the client update the data when the success flag is true
