@@ -10,9 +10,9 @@ const addGelatoRequest = makeActionCreator('ADD_GELATO_REQUEST')
 const addGelatoSuccess = makeActionCreator('ADD_GELATO_SUCCESS')
 const addGelatoError = makeActionCreator('ADD_GELATO_ERROR')
 /* EDIT GELATO */
-const editGelatoRequest = makeActionCreator('EDIT_GELATO_REQUEST')
-const editGelatoSuccess = makeActionCreator('EDIT_GELATO_SUCCESS')
-const editGelatoError = makeActionCreator('EDIT_GELATO_ERROR')
+const editGelatoRequest = makeActionCreator('UPDATE_GELATO_REQUEST')
+const editGelatoSuccess = makeActionCreator('UPDATE_GELATO_SUCCESS')
+const editGelatoError = makeActionCreator('UPDATE_GELATO_ERROR')
 /* DELETE GELATO */
 const deleteGelatoRequest = makeActionCreator('DELETE_GELATO_REQUEST')
 const deleteGelatoSuccess = makeActionCreator('DELETE_GELATO_SUCCESS')
@@ -29,15 +29,21 @@ export function fetchGelatos(){
 		/*getGelatos()
 			.then(result => result.json())
 			.then(data => dispatch(fetchGelatosSuccess({data})))
-			.catch(error => {
+			.catch(error => dispatch(fetchGelatosError({error}))
 				
 		})*/
 
 		// Let's try to use Async Await to simplify Promise
 		try{
 			const response = await getGelatos()
-			const data = await response.json()
-			dispatch(fetchGelatosSuccess({data}))
+			if(response.ok) {
+				const data = await response.json()
+				dispatch(fetchGelatosSuccess({data}))
+				dispatch(toggleModal())
+			}else{
+				dispatch(fetchGelatosError({error: 'Network Error'}))
+				dispatch(toggleModal())
+			}
 		}catch(error){
 			dispatch(fetchGelatosError({error}))
 		}
@@ -50,12 +56,6 @@ export const toggleModal = modal => dispatch => {
 		payload: {
 			modal
 		}
-	})
-}
-
-export const toggleDrawer = () => dispatch => {
-	dispatch({
-		type: 'TOGGLE_DRAWER'
 	})
 }
 
@@ -82,6 +82,7 @@ export const createGelato = data => dispatch => {
 	})
 	.catch(error => {
 		dispatch(addGelatoError({error}))
+		dispatch(toggleModal())
 	})
 }
 
@@ -90,8 +91,14 @@ export const updateGelato = data => async dispatch => {
 
 	try{
 		const response = await saveGelato(data)
-		const json = await response.json()
-		dispatch(editGelatoSuccess({data: json}))
+		if(response.ok) {
+			const json = await response.json()
+			dispatch(editGelatoSuccess({data: json}))
+			//dispatch(toggleModal())
+		}else{
+			dispatch(editGelatoError({error: 'Network Error'}))
+			dispatch(toggleModal())
+		}
 	}catch(error){
 		dispatch(editGelatoError({error}))
 	}
@@ -102,10 +109,16 @@ export const deleteGelato = id => async dispatch => {
 
 	try{
 		const response = await removeGelato(id)
-		const json = await response.json()
-		dispatch(deleteGelatoSuccess({data: json}))
+		if(response.ok) {
+			const json = await response.json()
+			dispatch(deleteGelatoSuccess({data: json}))
+			dispatch(toggleModal())
+		}else{
+			dispatch(deleteGelatoError({error: 'Network Problem'}))
+			dispatch(toggleModal())
+		}		
 	}catch(error){
-		dispatch({error})
+		dispatch(deleteGelatoError({error}))
 	}
 }
 

@@ -33,7 +33,12 @@ class Gelato extends Component {
 			<div className="container">
 				
 				{this.props.showModal === 'add_gelato' &&
-					<AddModal toggleModal={toggleModal} submit={createGelato} />		
+					<Modal 
+						title="Insert Gelato"
+						render={(title) => (
+							<h1>{title}</h1>
+						)}
+					/>	
 				}
 				
 				<Control 

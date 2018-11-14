@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-export default class AddModal extends Component {
+export default class InsertModal extends Component {
 
 	onClose = (e) => {
 		e.preventDefault()

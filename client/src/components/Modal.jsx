@@ -1,23 +1,20 @@
 import React, { Component } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-export default class AddModal extends Component {
-	constructor(props) {
-	  	super(props);
-	    this.state = {
-			title: 'modal'
-	    }
-	}
+const Modal = (props) => {
+	
+	const {title} = props
 
-	render(){
-		return (
-			<div className="overlay">
-				<div className="modal">
-					{
-						this.props.render(this.state.title)
-					}
-				</div>
+	return (
+		<div className="overlay">
+			<div className="modal">
+				{
+					props.render(title)
+				}
 			</div>
-		)
-	}
+		</div>
+	)
+	
 }
+
+export default Modal

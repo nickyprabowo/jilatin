@@ -12,8 +12,8 @@ const gelato = {
 
 	addGelato: data => new Promise((resolve, reject) => {
 		// having hard time because of quote(') on values
-		let sql = `INSERT INTO gelato (id, name, quantity, description, image) 
-					VALUES ('${data.id}','${data.name}',${data.quantity},'${data.description}','${data.image}')`
+		let sql = `INSERT INTO gelato (id, name, quantity, description, image, price) 
+					VALUES ('${data.id}','${data.name}',${data.quantity},'${data.description}','${data.image}','${data.price}')`
 		db.query(sql, (err, result, fields) => {
 			if(err) return reject(err)
 			return resolve(result);
@@ -22,7 +22,6 @@ const gelato = {
 
 	deleteGelato: id => new Promise((resolve, reject) => {
 		let sql = "DELETE FROM gelato WHERE id='" + id + "'"
-		console.log(sql)
 		db.query(sql, (err, result, fields) => {
 			if(err) return reject(err);
 			return resolve(result);
@@ -30,7 +29,7 @@ const gelato = {
 	}),
 
 	updateGelato: (data) => new Promise((resolve,reject) => {
-		let sql = `UPDATE gelato SET name = ${data.name}, quantity = ${data.quantity}, price = ${data.price}, description = ${data.description}, image = ${data.image} WHERE id = ${data.id}`
+		let sql = `UPDATE gelato SET name = '${data.name}', quantity = '${data.quantity}', price = '${data.price}', description = '${data.description}' WHERE id = '${data.id}'`
 		db.query(sql, (err, result, fields) => {
 			if(err) return reject(err);
 			return resolve(result);

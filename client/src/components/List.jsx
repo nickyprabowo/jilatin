@@ -1,6 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import DeleteModal from './DeleteModal'
-import EditModal from './EditModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class List extends Component {
@@ -9,8 +7,8 @@ export default class List extends Component {
 		openAccordion: false
 	}
 
-	onEdit = (id) => {
-		this.props.selectItem(id)
+	onEdit = (data) => {
+		this.props.selectItem(data)
 		this.props.toggleModal('edit_gelato')
 	}
 
@@ -33,15 +31,6 @@ export default class List extends Component {
 
 		return (
 			<Fragment>
-
-				{this.props.showModal === 'delete_gelato' &&
-					<DeleteModal {...this.props}/>
-				}
-
-				{this.props.showModal === 'edit_gelato' &&
-					<EditModal {...this.props}/>
-				}
-
 				<tr className="item-row">
 					<td>
 						{accordionBtn}
@@ -50,7 +39,7 @@ export default class List extends Component {
 					<td>{data.quantity}</td>
 					<td>Rp {data.price}</td>
 					<td>
-						<button className="btn btn__small" onClick={this.onEdit.bind(this, data.id)}><FontAwesomeIcon icon="pencil-alt"/></button>
+						<button className="btn btn__small" onClick={this.onEdit.bind(this, data)}><FontAwesomeIcon icon="pencil-alt"/></button>
 						<button className="btn btn__small" onClick={this.onDelete.bind(this, data.id)}><FontAwesomeIcon icon="trash-alt"/></button>
 					</td>
 				</tr>
