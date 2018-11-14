@@ -59,7 +59,7 @@ router.put('/', upload.single('image'),(req,res) => {
 	}
 
 	Gelatos.updateGelato(data)
-		.then(result => res.status(201).json(data))
+		.then(result => res.status(201).json({data, 'success':true }))
 		.catch(err => res.status(500).json({'message': err}))
 })
 

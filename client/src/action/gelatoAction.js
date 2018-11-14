@@ -93,8 +93,8 @@ export const updateGelato = data => async dispatch => {
 		const response = await saveGelato(data)
 		if(response.ok) {
 			const json = await response.json()
-			dispatch(editGelatoSuccess({data: json}))
-			//dispatch(toggleModal())
+			dispatch(editGelatoSuccess({data: json.data}))
+			if(json.success) dispatch(toggleModal())
 		}else{
 			dispatch(editGelatoError({error: 'Network Error'}))
 			dispatch(toggleModal())

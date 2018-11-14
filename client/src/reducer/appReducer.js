@@ -40,11 +40,13 @@ export default function app(state=initialState, action){
 		}
 
 		case 'UPDATE_GELATO_SUCCESS': {
-			return updateItemArray(
+			const updatedArray = updateItemArray(
 				state.gelatos, 
 				action.payload.data.id, 
 				gelato => updateObject(gelato, action.payload.data)
 			)
+
+			return updateObject(state, { gelatos: updatedArray })
 		}
 
 		case 'UPDATE_GELATO_ERROR': {

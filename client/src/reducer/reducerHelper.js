@@ -10,7 +10,7 @@ export const updateItemArray = (array, itemId, cb) => {
 		if(item.id !== itemId){
 			return item
 		}
-
+		// item contained non updated item
 		const updatedItem = cb(item)
 		return updatedItem
 	})
