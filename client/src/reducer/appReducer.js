@@ -8,10 +8,7 @@ const viewState = {
 
 const initialState = {
 	gelatos: [],
-	showModal: '',
-	showDrawer: false,
-	sidebar: false,
-	input: false,
+	modalActive: '',
 	error: '',
 	viewMode: viewState.grid,
 	selectedItem: ''
@@ -59,6 +56,12 @@ export default function app(state=initialState, action){
 
 		case 'ADD_GELATO_SUCCESS': {
 			const newGelatos = state.gelatos.concat(action.payload.data)
+			console.log(newGelatos)
+			console.log(state)
+			console.log({
+				gelatos: newGelatos, 
+				asyncState: asyncState.loaded
+			})
 			return updateObject(state, {
 				gelatos: newGelatos, 
 				asyncState: asyncState.loaded
@@ -86,7 +89,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'TOGGLE_MODAL': {
-			return updateObject(state, {showModal: action.payload.modal})
+			return updateObject(state, {modalActive: action.payload.modal})
 		}
 
 		case 'TOGGLE_DRAWER': {

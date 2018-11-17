@@ -10,7 +10,7 @@ class Control extends Component {
 	}
 
 	openModal = () => {
-		this.props.toggleModal('add_gelato')
+		this.props.toggleModal('insert_gelato')
 	}
 
 	changeGridView = () => {

@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Control from './Control'
 import AddModal from './AddModal'
+import InsertModal from './InsertModal'
+import DeleteModal from './DeleteModal'
+import EditModal from './EditModal'
 import Modal from './Modal'
 import Grid from './Grid'
 import Table from './Table'
+import TableRP from './TableRP'
+import ListRP from './ListRP'
 import { CSSTransition } from 'react-transition-group'
 import { IsengHOC } from '../HOC/IsengHOC'
 
 class Gelato extends Component {
-
-	state = {
-		title: ''
-	}
 
 	componentDidMount = () => {
 		if(this.props.gelatos.length === 0){
@@ -25,21 +26,39 @@ class Gelato extends Component {
 
 	render(){
 
-		const { gelatos, toggleModal, createGelato } = this.props
-		const { title } = this.state
+		const { gelatos, modalActive, toggleModal, selectItem, createGelato, deleteGelato, updateGelato, selectedItem } = this.props
 
 		return(
 			
 			<div className="container">
 				
-				{this.props.showModal === 'add_gelato' &&
-					<Modal 
-						title="Insert Gelato"
-						render={(title) => (
-							<h1>{title}</h1>
-						)}
-					/>	
-				}
+				<Modal
+					name="insert_gelato"
+					modalActive={modalActive}
+					render={<InsertModal onClose={toggleModal} onSubmit={createGelato}/>}
+				/>
+
+				<Modal
+					name="delete_gelato"
+					modalActive={modalActive}
+					render={<DeleteModal 
+						onClose={toggleModal} 
+						selectedItem={selectedItem}
+						deselectItem={selectItem} 
+						onSubmit={deleteGelato}
+					/>}
+				/>
+
+				<Modal
+					name="edit_gelato"
+					modalActive={modalActive}
+					render={<EditModal
+						onClose={toggleModal} 
+						selectedItem={selectedItem}
+						deselectItem={selectItem} 
+						onSubmit={updateGelato}
+					/>}
+				/>
 				
 				<Control 
 					toggleModal={this.props.toggleModal} 
@@ -51,7 +70,12 @@ class Gelato extends Component {
 						<Grid items={gelatos} />
 					}
 					{this.props.viewMode === 'list' &&
-						<Table items={gelatos} {...this.props}/>
+						<TableRP
+							data={gelatos}
+							header={['','Name','Quantity','Price','']}
+							renderHeader={title => <th>{title}</th>}
+							renderItem={gelato => <ListRP key={gelato.id} data={gelato} selectItem={selectItem} toggleModal={toggleModal}/>}
+						/>
 					}
 				</div>
 			</div>

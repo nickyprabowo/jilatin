@@ -59,18 +59,6 @@ export const toggleModal = modal => dispatch => {
 	})
 }
 
-export const toggleSidebar = () => dispatch => {
-	dispatch({
-		type: 'TOGGLE_SIDEBAR'
-	})
-}
-
-export const toggleInput = () => dispatch => {
-	dispatch({
-		type: 'TOGGLE_INPUT'
-	})
-}
-
 export const createGelato = data => dispatch => {
 	dispatch(addGelatoRequest())
 	

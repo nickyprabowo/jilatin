@@ -42,6 +42,7 @@ router.post('/', upload.single('image'), (req,res) => {
 router.delete('/:id', (req,res) => {
 
 	const id = req.params.id
+	console.log(id)
 
 	Gelatos.deleteGelato(id)
 		.then(result => res.status(201).json({id}))

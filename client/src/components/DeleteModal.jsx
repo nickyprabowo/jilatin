@@ -4,15 +4,14 @@ import { CSSTransition } from 'react-transition-group'
 export default class DeleteModal extends Component {
 
 	onClose = () => {
-		this.props.selectItem()
-		this.props.toggleModal()
+		this.props.deselectItem()
+		this.props.onClose()
 	}
 
 	onSubmit = (e) => {
 		e.preventDefault()
 		const { selectedItem } = this.props
-		this.props.deleteGelato(selectedItem)
-		this.onClose()
+		this.props.onSubmit(selectedItem)
 	}
 
 	render(){
