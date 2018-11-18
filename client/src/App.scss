@@ -7,12 +7,17 @@
 @import './assets/scss/table';
 /* ASIDE */
 @import './assets/scss/sidebar';
+/* card's detail */
+@import './assets/scss/card_detail';
+/* NAVBAR */
+@import './assets/scss/navbar';
 
 $primary-color: #381163;
 $secondary-color: #bd335f;
 
 body{
 	font-family: 'PT Sans', sans-serif;
+	overflow: hidden;
 }
 
 h1,h2,h3,h4,h5{
@@ -21,10 +26,8 @@ h1,h2,h3,h4,h5{
 
 .App{
 	height: 100vh;
+	overflow: auto;
 }
-
-/* NAVBAR */
-@import './assets/scss/navbar';
 
 /* DROPDOWN */
 
@@ -57,8 +60,9 @@ h1,h2,h3,h4,h5{
 /* LOGO */
 
 .logo{
-	padding: 0.2em 0;
-	font-size: 32px;
+	font-family: 'PT Sans', sans-serif;
+	padding: 0.5em 0;
+	font-size: 24px;
 	color: #ffffff;
 }
 
@@ -82,7 +86,6 @@ h1,h2,h3,h4,h5{
 	padding: 0 20px;
 }
 
-
 /* CARD */
 
 .cards {
@@ -97,6 +100,10 @@ h1,h2,h3,h4,h5{
 	border: 1px solid #c1c1c196;
 	box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 	border-radius: 3px;
+
+	:hover {
+		cursor: pointer;
+	}
 }
 
 .card img {

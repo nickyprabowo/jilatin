@@ -21,6 +21,8 @@ const deleteGelatoError = makeActionCreator('DELETE_GELATO_ERROR')
 const chooseItem = makeActionCreator('SELECT_ITEM')
 /* CLOSE MESSAGE */
 const onCloseMessage = makeActionCreator('CLOSE_MESSAGE')
+/* TOGGLE CARD DETAIL*/
+const onCardDetail = makeActionCreator('TOGGLE_CARD_DETAIL')
 
 export function fetchGelatos(){
 	return async function(dispatch){
@@ -119,3 +121,5 @@ export const makeError = () => dispatch => dispatch({type: 'MAKE_ERROR'})
 export const closeMessage = () => dispatch => dispatch(onCloseMessage())
 
 export const selectItem = (id='') => dispatch => dispatch(chooseItem({id}))
+
+export const toggleCardDetail = () => dispatch => dispatch(onCardDetail())

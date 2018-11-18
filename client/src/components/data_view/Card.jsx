@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 
 class Card extends Component {
+
+	onCardDetail = (item) => {
+		this.props.selectItem(item)
+		this.props.toggleCardDetail()
+	}
+
 	render(){
 
 		const { item } = this.props
@@ -8,7 +14,7 @@ class Card extends Component {
 
 		return(
 			
-				<div className="card">
+				<div className="card" onClick={this.onCardDetail.bind(this,item)}>
 					<img src={imageURL} />
 					<div className="detail">
 						<h2 className="title">{item.name}</h2>

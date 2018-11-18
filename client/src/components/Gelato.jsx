@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import Control from './Control'
-import AddModal from './AddModal'
-import InsertModal from './InsertModal'
-import DeleteModal from './DeleteModal'
-import EditModal from './EditModal'
-import Modal from './Modal'
-import Grid from './Grid'
-import Table from './Table'
-import TableRP from './TableRP'
-import ListRP from './ListRP'
+import InsertModal from './modal/InsertModal'
+import DeleteModal from './modal/DeleteModal'
+import EditModal from './modal/EditModal'
+import Modal from './modal/Modal'
+import Grid from './data_view/Grid'
+import Table from './data_view/Table'
+import TableRP from './data_view/TableRP'
+import ListRP from './data_view/ListRP'
+import CardDetail from './data_view/CardDetail'
 import { CSSTransition } from 'react-transition-group'
 import { IsengHOC } from '../HOC/IsengHOC'
 
@@ -26,7 +26,7 @@ class Gelato extends Component {
 
 	render(){
 
-		const { gelatos, modalActive, toggleModal, selectItem, createGelato, deleteGelato, updateGelato, selectedItem } = this.props
+		const { gelatos, modalActive, toggleModal, toggleCardDetail, selectItem, createGelato, deleteGelato, updateGelato, selectedItem, cardDetail } = this.props
 
 		return(
 			
@@ -59,6 +59,8 @@ class Gelato extends Component {
 						onSubmit={updateGelato}
 					/>}
 				/>
+
+				<CardDetail showDetail={cardDetail} data={selectedItem}/>
 				
 				<Control 
 					toggleModal={this.props.toggleModal} 
@@ -67,7 +69,7 @@ class Gelato extends Component {
 				/>
 				<div className="container">
 					{this.props.viewMode === 'grid' &&
-						<Grid items={gelatos} />
+						<Grid items={gelatos} selectItem={selectItem} toggleCardDetail={toggleCardDetail} showDetail={cardDetail}/>
 					}
 					{this.props.viewMode === 'list' &&
 						<TableRP

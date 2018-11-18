@@ -11,7 +11,8 @@ const initialState = {
 	modalActive: '',
 	error: '',
 	viewMode: viewState.grid,
-	selectedItem: ''
+	selectedItem: '',
+	cardDetail: false
 }
 
 export default function app(state=initialState, action){
@@ -115,6 +116,10 @@ export default function app(state=initialState, action){
 
 		case 'SELECT_ITEM': {
 			return updateObject(state, {selectedItem: action.payload.id})
+		}
+
+		case 'TOGGLE_CARD_DETAIL': {
+			return updateObject(state, {cardDetail: !state.cardDetail})
 		}
 
 		default: 

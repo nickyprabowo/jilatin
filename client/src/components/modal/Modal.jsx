@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { CSSTransition } from 'react-transition-group'
 
 // I want to create Modal
 // called with <Modal {..some props} />

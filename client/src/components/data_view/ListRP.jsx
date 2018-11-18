@@ -44,7 +44,7 @@ class ListRP extends Component {
 				</tr>
 				{this.state.openAccordion &&
 					<tr className="item-description">
-						<td colspan="5">lorem ipsum dolor sit amet consectetum</td>
+						<td colspan="5">{data.description}</td>
 					</tr>
 				}
 			</Fragment>

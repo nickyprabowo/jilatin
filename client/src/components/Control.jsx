@@ -36,7 +36,7 @@ class Control extends Component {
 
 		return (
 			<div className="control">
-				<button className="btn btn__purple" onClick={this.openModal}><FontAwesomeIcon icon="plus" /> <span>Input Menu</span></button>
+				<button className="btn btn__purple" onClick={this.openModal}><FontAwesomeIcon icon="plus" /> <span>Add</span></button>
 				<div className="view-control">
 					<button className={gridViewClass} onClick={this.changeGridView}>
 						<FontAwesomeIcon icon="th" />
