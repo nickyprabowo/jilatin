@@ -4,7 +4,7 @@ import List from './List'
 const TableRP = (props) => {
 	return (
 		<div className="list-view">
-			<table>
+			<table className='basic'>
 				<thead>
 					{props.header.map( title => props.renderHeader(title))}
 				</thead>

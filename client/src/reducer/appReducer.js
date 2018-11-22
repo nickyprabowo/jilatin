@@ -9,7 +9,7 @@ const viewState = {
 const initialState = {
 	gelatos: [],
 	modalActive: '',
-	error: '',
+	message: '',
 	viewMode: viewState.grid,
 	selectedItem: '',
 	cardDetail: false
@@ -30,7 +30,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'GET_GELATOS_ERROR':{
-			return updateObject(state, { asyncState: asyncState.error, error: action.payload.error })
+			return updateObject(state, { asyncState: asyncState.error, message: action.payload.error })
 		}
 
 		case 'UPDATE_GELATO_REQUEST': {
@@ -48,7 +48,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'UPDATE_GELATO_ERROR': {
-			return updateObject(state, { asyncState: asyncState.error, error: action.payload.error })
+			return updateObject(state, { asyncState: asyncState.error, message: action.payload.error })
 		}
 
 		case 'ADD_GELATO_REQUEST': {
@@ -58,11 +58,6 @@ export default function app(state=initialState, action){
 		case 'ADD_GELATO_SUCCESS': {
 			const newGelatos = state.gelatos.concat(action.payload.data)
 			console.log(newGelatos)
-			console.log(state)
-			console.log({
-				gelatos: newGelatos, 
-				asyncState: asyncState.loaded
-			})
 			return updateObject(state, {
 				gelatos: newGelatos, 
 				asyncState: asyncState.loaded
@@ -70,7 +65,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'ADD_GELATO_ERROR': {
-			return updateObject(state, {asyncState: asyncState.error})
+			return updateObject(state, {asyncState: asyncState.error, message: action.payload.error})
 		}
 
 		case 'DELETE_GELATO_REQUEST': {
@@ -86,7 +81,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'DELETE_GELATO_ERROR': {
-			return updateObject(state, {asyncState: asyncState.error})
+			return updateObject(state, {asyncState: asyncState.error, message: action.payload.error})
 		}
 
 		case 'TOGGLE_MODAL': {

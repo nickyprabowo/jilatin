@@ -6,12 +6,12 @@ export default class EditModal extends Component {
 		super(props)
 		// pre filled the form with existing data
 		this.state = {
-			id: this.props.selectedItem.id,
-			name: this.props.selectedItem.name,
-			description: this.props.selectedItem.description,
-			price: this.props.selectedItem.price,
-			quantity: this.props.selectedItem.quantity,
-			iamge: this.props.selectedItem.image
+			id: this.props.data.id,
+			name: this.props.data.name,
+			description: this.props.data.description,
+			price: this.props.data.price,
+			quantity: this.props.data.quantity,
+			image: this.props.data.image
 		}
 	}
 	
@@ -40,6 +40,7 @@ export default class EditModal extends Component {
 		formData.append('description', this.state.description)
 		formData.append('price', this.state.price)
 		formData.append('quantity', this.state.quantity)
+		formData.append('image', this.state.image)
 
 		this.props.onSubmit(formData)
 	}

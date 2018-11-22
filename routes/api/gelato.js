@@ -25,13 +25,15 @@ router.get('/', (req,res) => {
 })
 
 router.post('/', upload.single('image'), (req,res) => {
+	const image = req.file ? req.file.filename : ''
+
 	const data = {
 		id: uuidv5(req.body.name, uuidv5.URL),
 		name: req.body.name,
 		quantity: req.body.quantity,
 		price: req.body.price,
 		description: req.body.description,
-		image: req.file.filename
+		image: image
 	}
 
 	Gelatos.addGelato(data)
@@ -50,13 +52,16 @@ router.delete('/:id', (req,res) => {
 })
 
 router.put('/', upload.single('image'),(req,res) => {
+	//const image = req.file ? req.file.filename : ''
+	console.log(req.file.filename)
 
 	const data = {
 		id: req.body.id,
 		name: req.body.name,
 		quantity: req.body.quantity,
 		price: req.body.price,
-		description: req.body.description
+		description: req.body.description,
+		image: req.file.filename
 	}
 
 	Gelatos.updateGelato(data)

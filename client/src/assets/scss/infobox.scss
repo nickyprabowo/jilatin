@@ -1,0 +1,36 @@
+$basic_background: #fdf7ef;
+$alert_background: #ffb6b6;
+$success_background: #cdf7de;
+$basic_border: #f5ede3;
+$alert_border: #f9a6b2;
+$success_border: #b6f7d0;
+
+@mixin infobox($background_color: $basic_background, $border: $basic_border) {
+	position: absolute;
+    left: 50%;
+    padding: 2em 3em;
+    transform: translate(-50%);  
+    background: $background_color;
+	border: 1px solid $border;
+
+	span {
+    	position: absolute;
+	    top: 0;
+	    right: 0;
+	    padding: 0.5em 0.7em;
+	    cursor: pointer;
+    }
+}
+
+.infobox {
+	@include infobox()	
+}
+
+.infobox__error {
+	@include infobox($alert_background, $alert_border)
+}
+
+.infobox__success {
+	@include infobox($success_background, $success_border)
+}
+

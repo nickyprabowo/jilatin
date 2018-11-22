@@ -1,13 +1,14 @@
 .card-detail {
-	background: #fdfdfd;
-	width: 500px;
+	background: #bd335f;
+    width: 500px;
+    color: #efefef;
 	padding: 5em 1em;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    border: 1px solid #e8e8e8;
-    box-shadow: -1px 1px 5px 1px #e4e4e4; 
+    border: 1px solid #a23256;
+    box-shadow: -1px 0px 6px 2px #989393a1;
     transform: translate(500px);
     display: flex;
     flex-flow: column;

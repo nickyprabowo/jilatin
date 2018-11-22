@@ -65,15 +65,22 @@ export const createGelato = data => dispatch => {
 	dispatch(addGelatoRequest())
 	
 	addGelato(data)
-	.then(result => result.json())
-	.then(data => {
-		dispatch(addGelatoSuccess({data}))
-		dispatch(toggleModal())
-	})
-	.catch(error => {
-		dispatch(addGelatoError({error}))
-		dispatch(toggleModal())
-	})
+		.then(response => {
+			if(response.ok){
+				return response.json()
+			}else{
+				return response.json()
+					.then(error => Promise.reject(error.message))
+			}
+		})
+		.then(data => {
+			dispatch(addGelatoSuccess({data}))
+			dispatch(toggleModal())
+		})
+		.catch(error => {
+			dispatch(addGelatoError({error}))
+			dispatch(toggleModal())
+		})
 }
 
 export const updateGelato = data => async dispatch => {

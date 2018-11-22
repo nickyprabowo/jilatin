@@ -11,6 +11,10 @@
 @import './assets/scss/card_detail';
 /* NAVBAR */
 @import './assets/scss/navbar';
+/* INFO BOX */
+@import './assets/scss/infobox';
+/* MODAL */
+@import './assets/scss/modal';
 
 $primary-color: #381163;
 $secondary-color: #bd335f;
@@ -165,83 +169,8 @@ h1,h2,h3,h4,h5{
 
 @media only screen and (max-width: 600px){
 	.main-content {
-		padding: 1em;
+		padding: 5em 1em;
 	}
-}
-
-/* MODAL*/
-
-.overlay {
-	background: rgba(0,0,0,0.6);
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	z-index: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.modal {
-	background: white;
-	padding: 20px;
-	min-width: 300px;
-
-	&__header,
-	&__body,
-	&__footer {
-		padding: 15px;
-	}
-
-	&__footer {
-		display: flex;
-		justify-content: flex-end;
-	}
-}
-
-/* Overlay Transition */
-
-.overlaying-enter{
-	background: rgba(0,0,0,0);
-	z-index: 0;
-}
-
-.overlaying-enter-active{
-	background: rgba(0,0,0,0.6);
-	z-index: 2;
-	transition: background 300ms ease-in, z-index 300ms ease-in;
-}
-
-.overlaying-exit{
-	background: rgba(0,0,0,0.6);
-	z-index: 2;
-}
-
-.overlaying-exit-active{
-	background: rgba(0,0,0,0);
-	z-index:  -1000;
-	transition: background 300ms ease-out, z-index 100ms ease-out;
-}
-
-/* End of Overlay Transition */
-
-.form__field {
-	margin: 10px 0;
-}
-
-.form__label {
-	margin: 5px 0;
-}
-
-.form__input {
-	width: 100%;
-}
-
-/* Responsive layout - makes a two column-layout instead of four columns */
-@media (max-width: 850px) {
-
 }
 
 /* BUTTON */
