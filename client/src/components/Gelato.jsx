@@ -15,10 +15,16 @@ import { IsengHOC } from '../HOC/IsengHOC'
 
 class Gelato extends Component {
 
+	state = {
+		infoType: "",
+		timeoutDuration: 0
+	}
+
 	componentDidMount = () => {
 		if(this.props.gelatos.length === 0){
 			this.props.fetchGelatos()
 		}
+
 	}
 
 	onError = () => {
@@ -27,16 +33,29 @@ class Gelato extends Component {
 
 	render(){
 
-		const { gelatos, error, modalActive, toggleModal, toggleCardDetail, selectItem, createGelato, deleteGelato, updateGelato, selectedItem, cardDetail } = this.props
+		const { gelatos, error, modalActive, toggleModal, toggleCardDetail, selectItem, 
+			createGelato, deleteGelato, updateGelato, selectedItem, cardDetail, message, 
+			asyncState, closeMessage } = this.props
+
+		let infoType = "", timeoutDuration = 0
+
+		if(this.props.asyncState === "error") {
+			infoType = "error"
+		}else if(this.props.asyncState === "loaded") {
+			infoType = "success"
+			timeoutDuration = 4000
+		}
 
 		return(
 			
 			<div className="container">
 
 				<InfoBox
-					open={error}
-					message='jiakakaka'
-					type='error'
+					open={message}
+					message={message}
+					onClose={closeMessage}
+					type={infoType}
+					timeout={timeoutDuration}
 				/>
 				
 				<Modal
@@ -44,31 +63,28 @@ class Gelato extends Component {
 					modalActive={modalActive}
 					onClose={toggleModal}
 					onSubmit={createGelato}
-				>
-					{props => <InsertModal {...props}/>}
-				</Modal>
+					render={props => <InsertModal {...props}/>}
+				/>
 
 				<Modal
 					name="delete_gelato"
 					modalActive={modalActive}
-					data={selectedItem}
+					item={selectedItem}
 					onClose={toggleModal}
 					deselectItem={selectItem} 
 					onSubmit={deleteGelato}
-				>
-					{props => <DeleteModal {...props}/>}	
-				</Modal>
+					render={props => <DeleteModal {...props}/>}
+				/>
 
 				<Modal
 					name="edit_gelato"
 					modalActive={modalActive}
 					onClose={toggleModal} 
-					data={selectedItem}
+					item={selectedItem}
 					deselectItem={selectItem} 
 					onSubmit={updateGelato}
-				>
-					{props => <EditModal {...props}/>}
-				</Modal>
+					render={props => <EditModal {...props}/>}
+				/>
 
 				<CardDetail showDetail={cardDetail} data={selectedItem}/>
 				
@@ -97,4 +113,4 @@ class Gelato extends Component {
 	}
 }
 
-export default IsengHOC(Gelato)
+export default Gelato

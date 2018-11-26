@@ -30,7 +30,7 @@ class ListRP extends Component {
 
 		return (
 			<Fragment>
-				<tr className="item-row">
+				<tr className="item-row" key={data.id}>
 					<td>
 						{accordionBtn}
 					</td>

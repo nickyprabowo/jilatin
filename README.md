@@ -14,6 +14,7 @@ React.js
 - Create actions creator helper so I don't to create object literal action creator over and over again
 - Create reusable table using render props technique
 - Change Modal component to use Portals, so that it can render wherever we want in the DOM, outside our component declaration
+- [IMPORTANT] children do not update based on PROPS CHANGE. in this case we can use componentDidUpdate (ex: InfoBox)
 
 Problem
 1. Database not updated when I send PUT request. Actual request is not sent but I always received empty response from OPTIONS method instead

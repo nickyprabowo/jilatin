@@ -20,11 +20,16 @@ const upload = multer({storage: storage})
 
 router.get('/', (req,res) => {
 	Gelatos.getGelato()
-		.then(result => res.status(200).json(result))
-		.catch(err => res.status(500).json(err))
+		.then(data => res.status(200).json({
+			data, 
+			message: 'Es krim berhasil diambil',
+			success: true
+		}))
+		.catch(err => res.status(500).json({message: err.message, status: false}))
 })
 
 router.post('/', upload.single('image'), (req,res) => {
+
 	const image = req.file ? req.file.filename : ''
 
 	const data = {
@@ -37,23 +42,33 @@ router.post('/', upload.single('image'), (req,res) => {
 	}
 
 	Gelatos.addGelato(data)
-		.then(result => res.status(200).json(data))
-		.catch(err => res.status(500).json({'message':err}))
+		.then(result => {
+			return res.status(200).json({
+				data, 
+				message: 'Es krim berhasil ditambahkan',
+				success: true
+			})
+		})
+		.catch(err => res.status(500).json({message: err.message, status: false}))
 })
 
 router.delete('/:id', (req,res) => {
 
 	const id = req.params.id
-	console.log(id)
 
 	Gelatos.deleteGelato(id)
-		.then(result => res.status(201).json({id}))
-		.catch(err => res.status(500).json({'message':err}))
+		.then(result => {
+			if(result.affectedRows === 0){
+				return Promise.reject({message:'ID not found', success: false})
+			}
+			return res.status(201).json({id, status: true})
+		})
+		.catch(err => res.status(500).json({message: err.message, status: false}))
 })
 
 router.put('/', upload.single('image'),(req,res) => {
-	//const image = req.file ? req.file.filename : ''
-	console.log(req.file.filename)
+	
+	const image = req.file ? req.file.filename : ''
 
 	const data = {
 		id: req.body.id,
@@ -61,12 +76,17 @@ router.put('/', upload.single('image'),(req,res) => {
 		quantity: req.body.quantity,
 		price: req.body.price,
 		description: req.body.description,
-		image: req.file.filename
+		image: image
 	}
 
 	Gelatos.updateGelato(data)
-		.then(result => res.status(201).json({data, 'success':true }))
-		.catch(err => res.status(500).json({'message': err}))
+		.then(result => {
+			if(result.affectedRows === 0){
+				return Promise.reject({message:'ID not found', success: false})
+			}
+			return res.status(201).json({data, success: true})
+		})
+		.catch(err => res.status(500).json({message: err.message, status: false}))
 })
 
 module.exports = router

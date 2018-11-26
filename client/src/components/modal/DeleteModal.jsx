@@ -3,18 +3,15 @@ import { CSSTransition } from 'react-transition-group'
 
 export default class DeleteModal extends Component {
 
-	onClose = () => {
-		this.props.deselectItem()
-		this.props.onClose()
-	}
-
 	onSubmit = (e) => {
 		e.preventDefault()
-		const { selectedItem } = this.props
-		this.props.onSubmit(selectedItem)
+		const { item } = this.props
+		this.props.onSubmit(item)
 	}
 
 	render(){
+
+		
 		return (
 			<div className="overlay">
 				<div className="modal">

@@ -14,11 +14,11 @@ app.use((req, res, next) => {
 	res.header("Access-Control-Allow-Headers", 
 		"Origin, X-Requested-With, Content-Type, Authorization, Accept"
 	) // Any kind of headers to be allowed
+	res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 	if(req.method == "OPTIONS") {
-		res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 		return res.status(200).json({})
 	} // options is preflight request to check if the request made is allowed 
-	next() // pass all the thing to the next middleware
+	next() // pass all the things to the next middleware
 })
 
 app.use(express.static('uploads'))

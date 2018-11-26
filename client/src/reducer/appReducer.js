@@ -25,7 +25,8 @@ export default function app(state=initialState, action){
 		case 'GET_GELATOS_SUCCESS':{
 			return updateObject(state, {
 				gelatos: action.payload.data,
-				asyncState: asyncState.loaded
+				asyncState: asyncState.loaded,
+				message: action.payload.message
 			})
 		}
 
@@ -38,16 +39,18 @@ export default function app(state=initialState, action){
 		}
 
 		case 'UPDATE_GELATO_SUCCESS': {
+			console.log(action.payload)
 			const updatedArray = updateItemArray(
 				state.gelatos, 
 				action.payload.data.id, 
 				gelato => updateObject(gelato, action.payload.data)
 			)
 
-			return updateObject(state, { gelatos: updatedArray })
+			return updateObject(state, { gelatos: updatedArray, message: 'Data es krim berhasil diubah' })
 		}
 
 		case 'UPDATE_GELATO_ERROR': {
+			console.log(action.payload)
 			return updateObject(state, { asyncState: asyncState.error, message: action.payload.error })
 		}
 
@@ -57,7 +60,6 @@ export default function app(state=initialState, action){
 
 		case 'ADD_GELATO_SUCCESS': {
 			const newGelatos = state.gelatos.concat(action.payload.data)
-			console.log(newGelatos)
 			return updateObject(state, {
 				gelatos: newGelatos, 
 				asyncState: asyncState.loaded
@@ -106,7 +108,7 @@ export default function app(state=initialState, action){
 		}
 
 		case 'CLOSE_MESSAGE': {
-			return updateObject(state, {asyncState: asyncState.idle})
+			return updateObject(state, {asyncState: '', message: ''})
 		}
 
 		case 'SELECT_ITEM': {

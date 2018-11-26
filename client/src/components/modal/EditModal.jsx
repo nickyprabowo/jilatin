@@ -6,12 +6,12 @@ export default class EditModal extends Component {
 		super(props)
 		// pre filled the form with existing data
 		this.state = {
-			id: this.props.data.id,
-			name: this.props.data.name,
-			description: this.props.data.description,
-			price: this.props.data.price,
-			quantity: this.props.data.quantity,
-			image: this.props.data.image
+			id: this.props.item.id,
+			name: this.props.item.name,
+			description: this.props.item.description,
+			price: this.props.item.price,
+			quantity: this.props.item.quantity,
+			image: this.props.item.image
 		}
 	}
 	
@@ -23,12 +23,6 @@ export default class EditModal extends Component {
 		this.setState({
 			[name]: value
 		})
-	}
-
-	onClose = (e) => {
-		e.preventDefault()
-		this.props.deselectItem()
-		this.props.onClose()
 	}
 
 	onSubmit = (e) => {
@@ -78,7 +72,7 @@ export default class EditModal extends Component {
 				<div className="modal__footer">
 					<div className="group">
 						<button className="btn btn__purple" type='submit' onClick={this.onSubmit}>Save</button>
-						<button className="btn btn__cancel" onClick={this.onClose}>Cancel</button>
+						<button className="btn btn__cancel" onClick={this.props.onClose}>Cancel</button>
 					</div>
 				</div>
 			</form>

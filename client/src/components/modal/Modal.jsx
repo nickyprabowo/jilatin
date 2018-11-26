@@ -34,16 +34,23 @@ class Modal extends Component {
 		e.stopPropagation()
 	}
 
+	handleClose = () => {
+		if(this.props.deselectItem) this.props.deselectItem()
+		this.props.onClose()
+	}
+
 	render(){
-		const { modalActive, name, onClose } = this.props
+		const { modalActive, name } = this.props
+
+		const newProps = {...this.props, ...this.handleClose}
 
 		if(modalActive === name){
 			return (
 				ReactDOM.createPortal(
 					<Fragment>
-						<div className="overlay" onClick={onClose}>
+						<div className="overlay" onClick={this.handleClose}>
 							<div className="modal" onClick={this.preventClose}>
-							      {this.props.children(this.props)}
+							      {this.props.render(newProps)}
 							</div>
 						</div>
 					</Fragment>,

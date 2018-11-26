@@ -28,26 +28,17 @@ export function fetchGelatos(){
 	return async function(dispatch){
 		dispatch(fetchGelatosRequest())
 
-		/*getGelatos()
-			.then(result => result.json())
-			.then(data => dispatch(fetchGelatosSuccess({data})))
-			.catch(error => dispatch(fetchGelatosError({error}))
-				
-		})*/
-
 		// Let's try to use Async Await to simplify Promise
 		try{
 			const response = await getGelatos()
+			const result = await response.json()
 			if(response.ok) {
-				const data = await response.json()
-				dispatch(fetchGelatosSuccess({data}))
-				dispatch(toggleModal())
+				dispatch(fetchGelatosSuccess({data: result.data, message: result.message}))
 			}else{
-				dispatch(fetchGelatosError({error: 'Network Error'}))
-				dispatch(toggleModal())
+				return Promise.reject(result)
 			}
 		}catch(error){
-			dispatch(fetchGelatosError({error}))
+			dispatch(fetchGelatosError({error: error.message}))
 		}
 	}
 }
@@ -66,19 +57,18 @@ export const createGelato = data => dispatch => {
 	
 	addGelato(data)
 		.then(response => {
-			if(response.ok){
-				return response.json()
+			if(!response.ok){
+				return Promise.reject(response.json())
 			}else{
 				return response.json()
-					.then(error => Promise.reject(error.message))
 			}
 		})
-		.then(data => {
-			dispatch(addGelatoSuccess({data}))
+		.then(result => {
+			dispatch(addGelatoSuccess({data: result.data, message: result.message}))
 			dispatch(toggleModal())
 		})
 		.catch(error => {
-			dispatch(addGelatoError({error}))
+			dispatch(addGelatoError({error: error.message}))
 			dispatch(toggleModal())
 		})
 }
@@ -88,16 +78,19 @@ export const updateGelato = data => async dispatch => {
 
 	try{
 		const response = await saveGelato(data)
+		const json = await response.json()
+		console.log(json)
 		if(response.ok) {
-			const json = await response.json()
 			dispatch(editGelatoSuccess({data: json.data}))
 			if(json.success) dispatch(toggleModal())
-		}else{
-			dispatch(editGelatoError({error: 'Network Error'}))
-			dispatch(toggleModal())
 		}
+
+		throw new Error(json)
+
 	}catch(error){
-		dispatch(editGelatoError({error}))
+		console.log(error.message)
+		dispatch(editGelatoError({error: error.message}))
+		dispatch(toggleModal())
 	}
 }
 
@@ -106,16 +99,17 @@ export const deleteGelato = id => async dispatch => {
 
 	try{
 		const response = await removeGelato(id)
+		const json = await response.json()
 		if(response.ok) {
-			const json = await response.json()
 			dispatch(deleteGelatoSuccess({data: json}))
 			dispatch(toggleModal())
-		}else{
-			dispatch(deleteGelatoError({error: 'Network Problem'}))
-			dispatch(toggleModal())
-		}		
+		}
+		
+		return Promise.reject(json)
+				
 	}catch(error){
-		dispatch(deleteGelatoError({error}))
+		dispatch(deleteGelatoError({error: error.message}))
+		dispatch(toggleModal())
 	}
 }
 
